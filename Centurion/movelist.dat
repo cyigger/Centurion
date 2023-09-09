@@ -1,0 +1,34 @@
+
+<#f0f000>:EX ATTACKS!:</>
+
+ice (1/4 Bar)								^C
+	"ill finish this later"
+
+Ice Shard (1/2 Bar)				_D^C
+	"shoot ice shard"
+
+Ice Bomb (1/2 Bar)				_AIR^C
+	"Centurion propels himself forward by
+	breaking the ice that surrounds him."
+
+Ice Slinger (1/4 Bar)				_AIR_D^C
+	"Centurion slings an ice beam that explodes 
+	once hitting the ground."
+
+
+<#f0f000>:STAR STRIKES!:</>
+
+ice (1 Bar)					_D_DF_F^A
+	"ill finish this later, wall"
+
+ice (1 Bar)					_D_DB_B^A
+	"ill finish this later, dp"
+
+karambit (1 Bar, _AIR OK)    _D_DF_F^B
+	"ill finish this later"
+
+karambit (1 Bar, _AIR OK)		_D_DB_B^B
+	"ill finish this later, combo ender"
+
+"The Move Of All Time" (2 Bars)				_D_DF_F^C
+	"it exists"
