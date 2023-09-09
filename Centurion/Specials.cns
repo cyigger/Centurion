@@ -107,10 +107,6 @@ anim = 20005
 velset = 0,0
 sprpriority = 5
 
-
-;ignorehitpause = 
-;persistent = 
-
 [State 0, reversalMove]
 type = MapSet
 trigger1 = 1
@@ -169,7 +165,7 @@ damage    = 95
 Hitflag = MAFD
 guardflag = MA
 pausetime = 0,80
-guard.pausetime = 0,4
+guard.pausetime = 0,15
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -9,-30
@@ -688,6 +684,14 @@ ctrl = 0
 anim = 5000
 sprpriority = 0
 
+[State 0, ScreenBound]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+;ignorehitpause = 
+;persistent = 
+
 
 [State 0, PlayerPush]
 type = PlayerPush
@@ -742,24 +746,10 @@ map = "enableDHC"
 value = 1
 
 [State 0, VelSet]
-type = PosAdd
-trigger1 = Time = 28
-y = -120
+type = VelAdd
+trigger1 = Time = 2
+x = -6
 
-[State 0, VelSet]
-type = VelSet
-trigger1 = Time = 28
-y = -4
-
-[State 0, PosAdd]
-type = PosSet
-trigger1 = time = 25
-x = enemy,pos x/2
-
-[State 0, PosAdd]
-type = PosSet
-trigger1 = time = 28
-x = enemy,pos x
 
 
 [State 0, NotHitBy]
@@ -794,7 +784,7 @@ ID = 622
 pos = 0,-20
 postype = P1  ;P2, Front, Back, Left, Right
 facing = 1
-bindtime = 10
+bindtime = 28
 removetime = -2
 supermovetime = 0
 pausemovetime = 0
@@ -851,8 +841,6 @@ size.height = 160
 supermovetime = 0
 pausemovetime = 0
 
-
-
 [State 0, ChangeState]
 type = ChangeState
 trigger1 = AnimTime = 0
@@ -903,7 +891,7 @@ triggerall = AnimElem = 4 && !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Light
-damage    = 100
+damage    = 110
 hitflag = MAFD
 guardflag = LA
 pausetime = 0,25
@@ -916,8 +904,8 @@ guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
 ground.hittime  = 20 + ifelse(enemy,movetype = A, 7,0)
-ground.velocity = 1,-12
-air.velocity = 1,-12
+ground.velocity = -1,-12
+air.velocity = -1,-12
 Fall = 1
 fall.recover = 0
 Envshake.time = 20
@@ -928,6 +916,7 @@ type = PosSet
 trigger1 = 1
 x = helper(23004), pos x
 y = 0
+
 [State 0, ScreenBound]
 type = ScreenBound
 trigger1 = 1
@@ -1130,7 +1119,7 @@ type = Destroyself
 trigger1 = Animtime = 0
 
 ;===============================================================================
-; "No more of that annoying ability!":
+; "grabby":
 ;-------------------------------------------------------------------------------
 [Statedef 24000]
 type    = S
@@ -1142,15 +1131,6 @@ anim = 24000
 velset = 0,0
 sprpriority = 2
 poweradd = -2000
-
-[State 200, Damage Proration] ; Sets player proration to 200 to prevent the Glitched state + infinite protection from breaking
-type = Varset
-trigger1 = movehit
-trigger1 = var(11) >= 250
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 200
 
 [State 0, I'm gonna do an unblockable attack!]
 type = Explod
@@ -1190,7 +1170,7 @@ y = 0
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 5
-x = 9
+x = 7.5
 y = 0
 
 [State 0, SuperPause]
@@ -1243,7 +1223,7 @@ p2facing = 1
 [State 200, End]
 type = ChangeState
 triggerall = movecontact
-trigger1 = Time = 37
+trigger1 = Time = 32
 value = 24500
 ctrl = 1
 
@@ -1260,7 +1240,7 @@ value = 0
 ctrl = 1
 
 ;===============================================================================
-; "No more of that annoying ability!":
+; "grabby twwo":
 ;-------------------------------------------------------------------------------
 [Statedef 24500]
 type    = S
@@ -1306,14 +1286,6 @@ trigger1 = !movecontact
 time = 1
 id = -1
 pos = 40,0
-
-[State 0, ScreenBound]
-type = ScreenBound
-trigger1 = 1
-value = 0
-movecamera = 0,0
-;ignorehitpause = 
-;persistent = 
 
 [State 0, PlayerPush]
 type = PlayerPush
@@ -1379,6 +1351,14 @@ Fall = 1
 Envshake.time = 20
 fall.recover = 0
 
+
+[State 7660, Zoom]
+type = zoom
+trigger1 = AnimElemTime(16) >= 0 && AnimElemTime(17) <= 0
+scale = 1.5
+pos = ifelse(facing=1,pos x + 20,pos x - 20), pos y
+ignorehitpause = 1
+
 [State 0, ChangeAnim]
 type = ChangeAnim
 trigger1 = time >= 117 && p2dist x = [-45,45]
@@ -1395,8 +1375,7 @@ triggerall = AnimElem = 16
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 330
-kill = 0 
+damage    = 230
 hitflag = MAFD
 pausetime = 30,30
 sparkno = 2
@@ -1409,9 +1388,17 @@ ground.hittime  = 15
 ground.velocity = -10,0
 air.velocity = -10,0
 Fall = 1
+kill = 0
 Envshake.time = 20
 fall.recover = 0
 
+[State 0, TargetLifeAdd]
+type = TargetLifeAdd
+trigger1 = AnimElem = 17
+value = -1
+kill = 1
+;ignorehitpause = 
+;persistent = 
 
 [State 200, Is he dead?]
 type = ChangeState
@@ -1531,6 +1518,7 @@ ground.hittime  = 1
 guard.velocity = -2
 airguard.velocity = 0,0
 forcenofall = 1
+kill = 0
 Envshake.time = 10
 
 [State 0, Explod]

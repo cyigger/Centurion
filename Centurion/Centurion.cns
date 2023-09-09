@@ -127,8 +127,7 @@ burn = 0 ; Tracks how many burn stacks this character has (Inflicted by Jay)
 ; ...
 
 [Quotes]
-victory0 = "placeholder"
-victory1 = "I win!"
+victory0 = ""
 ;---------------------------------------------------------------------------
 ; Lose by Time Over
 ; CNS difficulty: basic
@@ -169,23 +168,6 @@ type = PlaySnd
 trigger1 = AnimElem = 1
 value = S200,18
 volumescale = 200
-
-[State 181, Win Tracker]
-type = MapAdd
-trigger1 = Win && time = 1
-map = "roundCount"
-value = 1
-persistent = 0
-
-[State 191, Dialogue]
-type = Dialogue
-triggerall = roundno != 1
-triggerall = roundsexisted != (3,999)
-triggerall = enemy,name = "Saito" && Win && map(roundCount) = 2
-trigger1 = 1
-hidebars = 1
-text1 = "<p1><sound=self,9100,0>That's a game?! <sound=self,9100,0><wait=30>That was just a fight!<wait=30>"
-text2 = "<p2><sound=self,9100,0>n-now you're getting it...<wait=30>"
 
 [State 181, 1]
 type = NotHitBy
@@ -490,6 +472,13 @@ Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 4"
 value = 22000
 
+[State 200, SPECIAL 5 - thingy throw]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 2000
+trigger1 = command = "SPECIAL 5"
+value = 24000
+
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
@@ -523,6 +512,7 @@ value = 300
 [State 200, End]
 type = ChangeState
 Triggerall = movecontact
+Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 400
@@ -675,6 +665,14 @@ Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 4"
 value = 22000
 
+[State 200, SPECIAL 5 - thingy throw]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 2000
+trigger1 = command = "SPECIAL 5"
+value = 24000
+
+
 [State 210, Cancel into 2C]
 type = ChangeState
 Triggerall = movecontact
@@ -705,6 +703,7 @@ value = 310
 [State 210, Cancel into 5C]
 type = ChangeState
 Triggerall = movecontact
+Triggerall = power >= 200
 triggerall = numhelper(3500) = 0
 trigger1 = command = "c"
 value = 400
@@ -733,7 +732,7 @@ sprpriority = 2
 type = MapAdd
 trigger1 = movehit && enemy,gethitvar(fall)
 map = "juggle"
-value = 4
+value = 5
 persistent = 0
 
 [State 0, PlaySnd]
@@ -782,7 +781,7 @@ animtype  = Medium
 damage    = 15
 hitflag = MAF
 guardflag = MA
-pausetime = 10,10
+pausetime = 10,15
 guard.pausetime = 10,10
 sparkno = 1
 guard.sparkno = 13000
@@ -791,7 +790,7 @@ hitsound   = 5,1
 guardsound = 6,10
 ground.type = High
 ground.slidetime = 12
-ground.hittime  = 12 + ifelse(enemy,movetype = A, 7,0)
+ground.hittime  = 15 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = -2
 air.velocity = -1,-1
 Envshake.time = 5
@@ -831,6 +830,14 @@ triggerall = numhelper(3500) = 0
 Triggerall = power >= 1000
 trigger1 = command = "SPECIAL 4"
 value = 22000
+
+[State 200, SPECIAL 5 - thingy throw]
+type = ChangeState
+triggerall = numhelper(3500) = 0
+Triggerall = power >= 2000
+trigger1 = command = "SPECIAL 5"
+value = 24000
+
 
 [State 200, End]
 type = ChangeState
@@ -896,6 +903,14 @@ map = "juggle"
 value = 5
 persistent = 0
 
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 8
+
 [State 0, PlaySnd]
 type = PlaySnd
 triggerall = random < 600
@@ -919,13 +934,7 @@ trigger1 = Animelem = 2
 x = 7
 
 
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 8
+
 
 [State 0, PowerAdd]
 type = PowerAdd
@@ -1034,7 +1043,7 @@ physics = S
 juggle  = 0
 ctrl = 0
 anim = 400
-poweradd = -500
+poweradd = -200
 velset = 0,0
 sprpriority = 3
 
@@ -1055,10 +1064,6 @@ sprpriority = 2
 removeongethit = 1
 ;ignorehitpause = 
 ;persistent = 
-
-
-
-
 
 [State 0, Helper]
 type = Helper
@@ -1187,7 +1192,7 @@ triggerall = !movecontact
 trigger1 = 1
 attr = S, SP
 animtype  = Heavy
-damage    = 10
+damage    = 20
 Hitflag = MAFD
 guardflag = MA
 pausetime = 0,60
@@ -1358,19 +1363,19 @@ animtype  = Light
 damage    = 8
 hitflag = MAF
 guardflag = MAF
-pausetime = 0,8
+pausetime = 0,10
 sparkno = 0
-guard.pausetime = 0,4
+guard.pausetime = 0,5
 guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 12
-ground.hittime  = 15
+ground.hittime  = 18
 ground.velocity = -3,0
 air.velocity = -1,-2
-fall.recovertime = 25
+fall.recovertime = 30
 envshake.time = 5
 
 [State 0, Explod]
@@ -1492,7 +1497,7 @@ helpertype = normal ;player
 name = "Go! Go! Go! ki blast"
 ID = 461
 stateno = 461
-pos = 60,10
+pos = 60,-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -1523,12 +1528,6 @@ ctrl = 0
 anim = 461
 velset = 8,8
 sprpriority = 5
-
-[State 0, VelSet]
-type = VelSet
-triggerall = numhelper(23001) ; If your wall helper exists
-trigger1 = abs(helper(23001),pos x-pos x)<30 ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
-x = 0
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -1579,6 +1578,25 @@ trigger1 = movehit
 time = 100
 id = -1
 pos = 0,10
+;ignorehitpause = 
+;persistent = 
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = 1
+x = 8
+
+[State 0, VelSet]
+type = VelSet
+triggerall = numhelper(23001) ; If your wall helper exists
+trigger1 = abs(helper(23001),pos x-pos x)<30 ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
+x = 0
+
+[State 0, PosSet]
+type = PosSet
+triggerall = numhelper(23004) ; If your wall helper exists
+trigger1 = abs(helper(23004),pos x-pos x)<30 ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
+x = abs(helper(23004),pos x-pos x)-30
 ;ignorehitpause = 
 ;persistent = 
 
@@ -1911,12 +1929,12 @@ trans = add
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 3
-x = 9
+x = 7
 
 [State 0, VelSet]
 type = VelSet
 trigger1 = AnimElem = 6
-x = -5
+x = -3
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2053,6 +2071,15 @@ triggerall = numhelper(55000) = 0
 triggerall = numhelper(56000) = 0
 trigger1 = movecontact = 1
 value = 100
+
+[State 0, Damage Proration]
+type = VarAdd
+trigger1 = movehit
+v = 11
+ignorehitpause = 1
+persistent = 0
+value = 5
+
 
 [State 0, PlaySnd]
 type = PlaySnd
@@ -2275,6 +2302,17 @@ Triggerall = movecontact
 trigger1 = command = "a"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 210
+
+[State 210, 2C]
+type = ChangeState
+Triggerall = movecontact
+Triggerall = power >= 200
+triggerall = numhelper(3500) = 0
+triggerall = numhelper(465) = 0
+trigger1 = command = "holddown"
+trigger1 = command = "c"
+value = 450
+
 
 [State 200, 5C]
 type = ChangeState
@@ -2729,27 +2767,12 @@ trigger1 = time = 10
 time = 10
 length = 3
 
-[State 0, Juggle Map]
-type = MapAdd
-trigger1 = movehit && enemy,gethitvar(fall)
-map = "juggle"
-value = 10
-persistent = 0
-
 [State 0, FatalCounter]
 type = MapSet
 trigger1 = 1
 map = "fatal"
 value = 1
 ignorehitpause = 1
-
-[State 0, Damage Proration]
-type = VarAdd
-trigger1 = movehit
-v = 11
-ignorehitpause = 1
-persistent = 0
-value = 5
 
 [State 0, VelSet]
 type = VelSet

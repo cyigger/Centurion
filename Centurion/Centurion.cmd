@@ -752,7 +752,7 @@ type = ChangeState
 value = 400
 triggerall = numhelper(3500) = 0
 triggerall = numhelper(401) = 0
-Triggerall = power >= 500
+Triggerall = power >= 200
 triggerall = command = "c"
 Triggerall = statetype != A
 trigger1 = ctrl
