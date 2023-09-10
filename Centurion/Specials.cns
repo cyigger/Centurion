@@ -3,7 +3,7 @@
 ;===============================================================================
 
 ;===============================================================================
-; Ice Stomp:
+; Ice Breaker
 ;-------------------------------------------------------------------------------
 [Statedef 20000]
 type    = S
@@ -95,7 +95,7 @@ value = 0
 ctrl = 1
 
 ;===============================================================================
-; Ice Stomp: Break
+; Ice Breaker: Ice
 ;-------------------------------------------------------------------------------
 [Statedef 20005]
 type    = S
@@ -106,6 +106,25 @@ ctrl = 0
 anim = 20005
 velset = 0,0
 sprpriority = 5
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
 
 [State 0, reversalMove]
 type = MapSet
@@ -125,6 +144,13 @@ type = PosSet
 trigger1 = root,stateno = 20005 
 x = root,pos x
 y = root,pos y
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = AnimElem = 4
+value = S5,2
+volumescale = 200
+persistent = 0
 
 [State 310, Wallbounce]
 type = HitDef
@@ -217,7 +243,7 @@ trigger2 = root,movetype = H
 
 
 ;===============================================================================
-; spin
+; Karambit Dance
 ;-------------------------------------------------------------------------------
 [Statedef 21000]
 type    = S
@@ -315,6 +341,7 @@ damage    = 12
 hitflag = MAF
 guardflag = MA
 pausetime = 4,6
+guard.pausetime = 4,4
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-30
@@ -347,13 +374,14 @@ y = vel y/2
 
 [State 200, End]
 type = ChangeState
-trigger2 = Time = 40 && enemy,movetype != H || moveguarded && time = 35 || Time = 120 && enemy,movetype = H
+trigger2 = Time = 40 && enemy,movetype != H || moveguarded && time = 35 
 trigger1 = hitcount = 10 && enemy,movetype = H
+trigger3 = time = 180
 value = 21005
 ctrl = 1
 
 ;-------------------------------------------------------------------------------
-; spin end
+; Karambit Dance End
 [Statedef 21005]
 type    = S
 movetype= A
@@ -390,7 +418,7 @@ value = 0
 ctrl = 1
 
 ;===============================================================================
-; throw
+; Karambit Toss
 ;-------------------------------------------------------------------------------
 [Statedef 22000]
 type    = S
@@ -457,7 +485,7 @@ value = 50
 ctrl = 1
 
 ;===============================================================================
-; all yall better bzzbzzbzz
+; Karambit Toss: Karambit
 ;-------------------------------------------------------------------------------
 [Statedef 22005]
 type    = S
@@ -468,6 +496,25 @@ ctrl = 0
 anim = 22005
 velset = 10,0
 sprpriority = 2
+
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
 
 [State 0, Helper Guarded]
 type = RootMapSet
@@ -630,7 +677,7 @@ movecamera = 0,0
 [State 0, ModifyExplod]
 type = ModifyExplod
 trigger1 = rootdist x = [-20,20] && rootdist y = [-20,20] || time = 300
-trigger2 = p2dist x = [-45,45] && root,stateno = 24500
+trigger2 = p2dist x = [-65,65] && root,stateno = 24500
 ID = 22010
 pos = 0,0
 postype = P1  ;P2, Front, Back, Left, Right
@@ -668,15 +715,15 @@ y = 0
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = rootdist x = [-20,20] && rootdist y = [-20,20] || time = 300
-trigger2 = rootdist x = [-45,45] && root,stateno = 24500
+trigger2 = rootdist x = [-65,65] && root,stateno = 24500
 ;ignorehitpause = 
 ;persistent = 
 
 ;===============================================================================
-; enemy state
+; Karambit Toss: Enemy
 ;-------------------------------------------------------------------------------
 [Statedef 22010]
-type    = A
+type    = U
 movetype= H
 physics = N
 juggle  = 0
@@ -704,32 +751,20 @@ value = 0
 type = SelfState
 trigger1 = enemy,numhelper(22005) = 0
 value = 5080
-;anim =
-;ctrl =
-;ignorehitpause = 0
-;persistent = 1
 
 
-; ice wall
+;Ice Wall
 ;-------------------------------------------------------------------------------
 [Statedef 23000]
-type    = S
+type    = C
 movetype= A
-physics = S
+physics = C
 juggle  = 0
 ctrl = 0
 anim = 23000
 velset = 0,0
 sprpriority = 2
-poweradd = -1000
-
-[State 0, FatalCounter]
-type = MapSet
-triggerall = 1
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
+poweradd = -1500
 
 [State 0, Busterable]
 type = MapSet
@@ -861,6 +896,25 @@ attackdist = 5
 sprpriority = 2
 poweradd = 0
 
+[State -2, Counterhit TSP]
+type = Helper
+Triggerall = numhelper(4020) = 0
+trigger1 = movecountered
+helpertype = normal 
+name = "Counterhit TSP"
+supermovetime = 999999999999
+pausemovetime = 999999999999
+ignorehitpause = 1
+persistent = 0
+ID = 4020
+stateno = 4020
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 1
+ignorehitpause = 1
+persistent = 0
+
 [State 0, Helper Guarded]
 type = RootMapSet
 trigger1 = 1 
@@ -891,7 +945,7 @@ triggerall = AnimElem = 4 && !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Light
-damage    = 110
+damage    = 170
 hitflag = MAFD
 guardflag = LA
 pausetime = 0,25
@@ -959,7 +1013,7 @@ type = Destroyself
 trigger1 = Animtime = 0
 
 ;-------------------------------------------------------------------------------
-;HP: 2
+;Ice Wall HP: 2
 [Statedef 23002]
 type    = S
 movetype= I
@@ -1016,7 +1070,7 @@ type = Destroyself
 trigger1 = Animtime = 0
 
 ;-------------------------------------------------------------------------------
-;HP: 1
+; Ice Wall HP: 1
 [Statedef 23003]
 type    = S
 movetype= I
@@ -1077,7 +1131,7 @@ trigger1 = Animtime = 0
 
 
 ;-------------------------------------------------------------------------------
-; Position
+; Ice Wall Position
 [Statedef 23004]
 type    = S
 movetype= I
@@ -1090,19 +1144,12 @@ attackdist = 5
 sprpriority = 2
 poweradd = 0
 
-[State 0, Blink Red]
-type = PalFX
-trigger1 = Time = 0
-time = 5
-add = 255,0,0
-mul = 255,0,0
-
 [State 0, DestroySelf]
 type = DestroySelf
 trigger1 = numhelper(23001) = 0
 
 ;-------------------------------------------------------------------------------
-;break!
+; Ice wall break!
 [Statedef 23005]
 type    = S
 movetype= I
@@ -1113,6 +1160,13 @@ anim = 621
 velset = 0,0
 sprpriority = 2
 poweradd = 0
+
+[State 0, Blink Red]
+type = PalFX
+trigger1 = Time = 0
+time = 5
+add = 255,0,0
+mul = 255,0,0
 
 [State 200, End]
 type = Destroyself
@@ -1130,7 +1184,7 @@ ctrl = 0
 anim = 24000
 velset = 0,0
 sprpriority = 2
-poweradd = -2000
+poweradd = -1500
 
 [State 0, I'm gonna do an unblockable attack!]
 type = Explod
@@ -1301,7 +1355,7 @@ helpertype = normal ;player
 name = "boom"
 ID = 22005
 stateno = 22005
-pos = 50,-10
+pos = 66,-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 ownpal = 0
@@ -1361,7 +1415,7 @@ ignorehitpause = 1
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = time >= 117 && p2dist x = [-45,45]
+trigger1 = time >= 117 && p2dist x = [-65,65]
 value = 24500
 elem = 16
 ;ignorehitpause = 
@@ -1375,7 +1429,7 @@ triggerall = AnimElem = 16
 trigger1 = 1
 attr = S, SA
 animtype  = Heavy
-damage    = 230
+damage    = 250
 hitflag = MAFD
 pausetime = 30,30
 sparkno = 2
@@ -1392,6 +1446,13 @@ kill = 0
 Envshake.time = 20
 fall.recover = 0
 
+[State 0, Juggle Map]
+type = MapSet
+trigger1 = AnimElem = 16
+map = "juggle"
+value = 100
+persistent = 0
+
 [State 0, TargetLifeAdd]
 type = TargetLifeAdd
 trigger1 = AnimElem = 17
@@ -1407,7 +1468,7 @@ value = 0
 ctrl = 1
 
 ;----------------------------------===============================================================================
-; C two
+; grabby ice
 ;-------------------------------------------------------------------------------
 [Statedef 25000]
 type    = S
@@ -1419,6 +1480,12 @@ anim = 402
 velset = 0,0
 sprpriority = 1
 
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = movecontact
+value = S5,2
+volumescale = 200
+persistent = 0
 
 [State 0, Helper Guarded]
 type = RootMapSet

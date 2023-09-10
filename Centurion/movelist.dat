@@ -2,7 +2,7 @@
 <#f0f000>:EX ATTACKS!:</>
 
 Ice Trap (1/2 Bar)								^C
-	"Centurion surrounds the opponent with ice."
+	"Centurion encases the opponent in ice."
 
 Ice Shard (1/2 Bar)				_D^C
 	"Centurion shoots multiple ice shards."
@@ -18,7 +18,7 @@ Ice Slinger (1/4 Bar)				_AIR_D^C
 
 <#f0f000>:STAR STRIKES!:</>
 
-Ice Wall (1 Bar)					_D_DF_F^A
+Ice Wall (1 1/2 Bars)					_D_DF_F^A
 	"Centurion creates an ice spike under his
 	opponent. This can act as a wall."
 
@@ -28,16 +28,16 @@ Ice Breaker (1 Bar)					_D_DB_B^A
 
 Karambit Dance (1 Bar, _AIR OK)    _D_DF_F^B
 	"Centurion spins with one of his Karambits.
-	This move first goes near the opponent, then
-	activates."
+	This move first teleports near the opponent,
+	then activates."
 
-Karambit Toss (1 Bar, _AIR OK)		_D_DB_B^B
+Karambit Toss: "Holy Gimmick Wtf" (1 Bar, _AIR OK)		_D_DB_B^B
 	"Centurion throws one of his Karambits. As
 	long as this doesn't touch him it'll continue
 	spinning for 5 seconds."
 
-Grab: "The Move Of All Time" (2 Bars)				_D_DF_F^C
+Grab: "The Move Of All Time" (1 1/2 Bars)				_D_DF_F^C
 	"Centurions attempts to grab the opponent.
-	If successful he will trap the opponent in
+	If successful he will encase the opponent in
 	ice, toss his karambit at them and end off
 	with a strong punch."
