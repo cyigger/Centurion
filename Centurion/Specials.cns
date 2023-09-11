@@ -376,7 +376,7 @@ y = vel y/2
 type = ChangeState
 trigger2 = Time = 40 && enemy,movetype != H || moveguarded && time = 35 
 trigger1 = hitcount = 10 && enemy,movetype = H
-trigger3 = time = 180
+trigger3 = time = 120
 value = 21005
 ctrl = 1
 
@@ -634,6 +634,7 @@ damage    = 9
 hitflag = MAFD
 guardflag = MA
 pausetime = 0,15
+guard.pausetime = 2,10
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-30
@@ -648,7 +649,7 @@ guard.velocity = 2
 Fall = 1
 p2stateno = 22010
 Envshake.time = 20
-fall.recovertime = 50
+fall.recovertime = 60
 
 [State 0, Explod]
 type = Explod
@@ -896,6 +897,10 @@ attackdist = 5
 sprpriority = 2
 poweradd = 0
 
+[State 20, 2]
+type = Turn
+trigger1 = P2BodyDist X < -10
+
 [State -2, Counterhit TSP]
 type = Helper
 Triggerall = numhelper(4020) = 0
@@ -1024,6 +1029,10 @@ velset = 0,0
 sprpriority = 2
 poweradd = 0
 
+[State 20, 2]
+type = Turn
+trigger1 = P2BodyDist X < -10
+
 [State 0, Blink Red]
 type = PalFX
 trigger1 = Time = 0
@@ -1080,6 +1089,10 @@ ctrl = 0
 velset = 0,0
 sprpriority = 2
 poweradd = 0
+
+[State 20, 2]
+type = Turn
+trigger1 = P2BodyDist X < -10
 
 [State 0, Blink Red]
 type = PalFX

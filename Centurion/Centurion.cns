@@ -1101,6 +1101,11 @@ pausemovetime = 0
 inheritJuggle = 1
 keyctrl = 0
 
+[State 1000, 6]
+type = ChangeState
+trigger1 = command = "holddown" && command = "hold_c" && power >= 200 && time >= 4 && time <= 34
+value = 450
+ctrl = 1
 
 [State 1000, 6]
 type = ChangeState
@@ -1264,6 +1269,7 @@ type = DestroySelf
 trigger1 = animtime = 0
 trigger2 = root,movetype = H
 trigger3 = (root,stateno = 24000 || root,stateno = 21000) && root,movehit
+trigger4 = root,stateno != 400 && time <= 28
 
 
 ;===============================================================================
@@ -1279,6 +1285,14 @@ anim = 450
 poweradd = -200
 velset = 0,0
 sprpriority = 2
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = prevstateno = 400
+value = 450
+elem = 2
+;ignorehitpause = 
+persistent = 0
 
 [State 0, Helper]
 type = Helper
@@ -1678,11 +1692,11 @@ triggerall = numhelper(23001) ; If your wall helper exists
 trigger1 = abs(helper(23001),pos x-pos x)<30 ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
 x = 0
 
-[State 0, PosSet]
-type = PosSet
-triggerall = numhelper(23004) ; If your wall helper exists
-trigger1 = abs(helper(23004),pos x-pos x)<30 ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
-x = abs(helper(23004),pos x-pos x)-30
+;[State 0, PosSet]
+;type = PosSet
+;triggerall = numhelper(23004) ; If your wall helper exists
+;trigger1 = abs(helper(23004),pos x-pos x)<30  ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
+;x = helper(23004),pos x - 20
 ;ignorehitpause = 
 ;persistent = 
 
