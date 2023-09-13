@@ -1945,6 +1945,50 @@ time = 1
 facing = 0
 pos = 0,8
 
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = 1
+value = 26006
+elem = 17
+;ignorehitpause = 
+;persistent = 
+
+[State 0, HitOverride]
+type = HitOverride
+trigger1 = 1
+attr = SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT      ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+stateno = 26006
+time = 1
+ignorehitpause = 1
+;persistent = 
+
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = gethitvar(hitshaketime) = 0
+value = 26007
+ctrl = 0
+
+
+;===============================================================================
+; WAIT!!!!!
+;-------------------------------------------------------------------------------
+[Statedef 26007]
+type    = S
+movetype= H
+physics = S
+juggle  = 0
+ctrl = 0
+velset = 0,0
+sprpriority = 7
+
+[State 0, BindToRoot]
+type = BindToRoot
+trigger1 = 1
+time = 1
+facing = 0
+pos = 0,8
+
 [State 0, HitOverride]
 type = HitOverride
 trigger1 = 1
@@ -1964,25 +2008,25 @@ elem = 17
 
 [State 0, HitOverrideCheck]
 type = RootMapSet
-trigger1 = gethitvar(hitshaketime) = 0
+trigger1 = time = 3
 map = "hitOverride"
 value = 0
 
 [State 0, VarSet]
 type = ParentVarSet
-trigger1 = gethitvar(hitshaketime) = 0
+trigger1 = time = 3
 v = 18    ;fv = 10
 value = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = gethitvar(hitshaketime) = 0
+trigger1 = time = 3
 value = S5,0
 volumescale = 100
 
 [State 0, Explod]
 type = Explod
-trigger1 = gethitvar(hitshaketime) = 0
+trigger1 = time = 3
 anim = 621
 ID = 622
 pos = 0,-20
@@ -1998,4 +2042,4 @@ removeongethit = 1
 
 [State 0, DestroySelf]
 type = DestroySelf
-trigger1 = gethitvar(hitshaketime) = 0
+trigger1 = time = 3

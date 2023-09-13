@@ -1113,7 +1113,7 @@ keyctrl = 0
 
 [State 1000, 6]
 type = ChangeState
-trigger1 = command = "holddown" && command = "hold_c" && power >= 500 && time >= 4 && time <= 34
+trigger1 = command = "holddown" && command = "hold_c" && power >= 500 && time >= 4 && time <= 22
 value = 450
 ctrl = 1
 
@@ -1139,14 +1139,14 @@ sprpriority = 1
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = helper(401),movehit  && time = 30
+trigger1 = helper(401),movehit  && time = 26
 value = S400,0
 volumescale = 200
 channel = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
-trigger1 = helper(401),!movehit && time = 30
+trigger1 = helper(401),!movehit && time = 26
 value = S400,1
 volumescale = 200
 channel = 0
@@ -1201,13 +1201,13 @@ y = 0.44
 
 [State 0, PosSet]
 type = PosSet
-trigger1 = time <= 30
+trigger1 = time <= 24
 x = enemy,pos x
 y = enemy,pos y
 
 [State 0, PosSet]
 type = VelSet
-trigger1 = time > 30  && time <= 35
+trigger1 = time > 24  && time <= 29
 x = 0
 y = 0
 
@@ -1221,7 +1221,7 @@ persistent = 0
 
 [State 0, ChangeAnim]
 type = ChangeAnim
-trigger1 = movehit && time > 30  && time <= 60
+trigger1 = movehit && time > 24  && time <= 60 - 6
 value = 402
 elem = 15
 ;ignorehitpause = 
@@ -1281,7 +1281,7 @@ type = DestroySelf
 trigger1 = animtime = 0
 trigger2 = root,movetype = H
 trigger3 = (root,stateno = 24000 || root,stateno = 21000) && root,movehit
-trigger4 = root,stateno != 400 && time <= 27
+trigger4 = root,stateno != 400 && time <= 22
 
 
 ;===============================================================================
