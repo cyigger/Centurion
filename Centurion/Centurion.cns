@@ -127,7 +127,7 @@ burn = 0 ; Tracks how many burn stacks this character has (Inflicted by Jay)
 ; ...
 
 [Quotes]
-victory0 = ""
+victory0 = "Freezed."
 ;---------------------------------------------------------------------------
 ; Lose by Time Over
 ; CNS difficulty: basic
@@ -199,6 +199,14 @@ hidebars = 1
 text1 = "<p2>...<wait=30>I thought I was the only one with a beanie.<wait=15>"
 text2 = "<p1>Nah,<wait=15> now there are two.<wait=30>"
 
+
+[State 191, Dialogue]
+type = Dialogue
+triggerall = enemy,name = "kaby"
+trigger1 = 1
+hidebars = 1
+text1 = "<p2>let it go, let it go<wait=30>"
+
 [State 0, PlaySnd]
 type = PlaySnd
 trigger1 = AnimElem = 20
@@ -210,7 +218,7 @@ channel = 0
 type = PlaySnd
 trigger1 = AnimElemTime(1) = 1
 value = 190,2
-volumescale = 200
+volumescale = 50
 channel = 1
 
 [State 0, PlaySnd]
@@ -1020,10 +1028,12 @@ trigger1 = command = "SPECIAL 2"
 value = 20000
 
 
+
+
 [State 200, End]
 type = ChangeState
 Triggerall = movehit
-trigger1 = command = "up"
+trigger1 = command = "holdup"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 40
 
@@ -1103,7 +1113,7 @@ keyctrl = 0
 
 [State 1000, 6]
 type = ChangeState
-trigger1 = command = "holddown" && command = "hold_c" && power >= 200 && time >= 4 && time <= 34
+trigger1 = command = "holddown" && command = "hold_c" && power >= 500 && time >= 4 && time <= 34
 value = 450
 ctrl = 1
 
@@ -1204,10 +1214,10 @@ y = 0
 [State 0, TargetBind]
 type = TargetBind
 trigger1 = movehit
-time = 1
+time = 60
 pos = 0,-10
 ;ignorehitpause = 
-persistent = 1
+persistent = 0
 
 [State 0, ChangeAnim]
 type = ChangeAnim
@@ -1228,16 +1238,18 @@ damage    = 25
 Hitflag = MAFD
 guardflag = MA
 pausetime = 0,60
-guard.pausetime = 0,19
+guard.pausetime = 0,24
 sparkno = 046897856
 guard.sparkno = 13000
 sparkxy = -9,-30
 hitsound   = S0,3
 guardsound = 6,11
 ground.type = High
-ground.slidetime = 1
+ground.slidetime = 12
 ground.hittime  = 1
-guard.velocity = -2
+guard.velocity = 0
+ground.velocity = 0,0
+air.velocity = 0,0
 airguard.velocity = 0,0
 forcenofall = 1
 Envshake.time = 10
@@ -1269,7 +1281,7 @@ type = DestroySelf
 trigger1 = animtime = 0
 trigger2 = root,movetype = H
 trigger3 = (root,stateno = 24000 || root,stateno = 21000) && root,movehit
-trigger4 = root,stateno != 400 && time <= 28
+trigger4 = root,stateno != 400 && time <= 27
 
 
 ;===============================================================================
@@ -1282,7 +1294,7 @@ physics = S
 juggle  = 1
 ctrl = 0
 anim = 450
-poweradd = -200
+poweradd = ifelse(prevstateno=400,-500,-200)
 velset = 0,0
 sprpriority = 2
 
@@ -1313,7 +1325,7 @@ pausemovetime = 0
 [State 0, Helper]
 type = Helper
 trigger1 = time%3 = 0
-trigger1 = time >= 4 && time <= 19
+trigger1 = time >= 4 + 3 && time <= 19 + 3
 trigger1 = movetype != H 
 helpertype = normal ;player
 name = "ok"
@@ -1444,9 +1456,9 @@ animtype  = Light
 damage    = 8
 hitflag = MAF
 guardflag = MAF
-pausetime = 0,10
+pausetime = 0,11
 sparkno = 0
-guard.pausetime = 0,5
+guard.pausetime = 0,6
 guard.sparkno = 13000
 sparkxy = -8,-25
 hitsound   = 5,1
@@ -1552,7 +1564,7 @@ pausemovetime = 0
 ;ownpal = 1
 ;removeongethit = 1
 
-[State 0, Launch fwd if prevstate was NOT j2B]
+[State 0, erm what.]
 type = VelSet
 trigger1 = time = 0
 x = 0
@@ -1575,12 +1587,30 @@ channel = 0
 
 [State 0, Helper]
 type = Helper
-trigger1 = AnimElem = 3
+trigger1 = AnimElem = 3 && numhelper(23004 ) = 0
 helpertype = normal ;player
 name = "Go! Go! Go! ki blast"
 ID = 461
 stateno = 461
-pos = 60,-10
+pos = 50,-10
+postype = p1    ;p2,front,back,left,right
+facing = 1
+keyctrl = 0
+ownpal = 0
+scale = 1,1
+sprpriority = 5
+supermovetime = 0
+pausemovetime = 0
+inheritJuggle = 1
+
+[State 0, Helper]
+type = Helper
+trigger1 = AnimElem = 3 && numhelper(23004) > 0
+helpertype = normal ;player
+name = "Go! Go! Go! ki blast"
+ID = 461
+stateno = 461
+pos = ifelse(abs(helper(23004),pos x-pos x)=[-50,50],0,50),-10
 postype = p1    ;p2,front,back,left,right
 facing = 1
 keyctrl = 0
@@ -1692,11 +1722,17 @@ triggerall = numhelper(23001) ; If your wall helper exists
 trigger1 = abs(helper(23001),pos x-pos x)<30 ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
 x = 0
 
-;[State 0, PosSet]
-;type = PosSet
-;triggerall = numhelper(23004) ; If your wall helper exists
-;trigger1 = abs(helper(23004),pos x-pos x)<30  ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
-;x = helper(23004),pos x - 20
+[State 0, PosSet]
+type = PosSet
+triggerall = numhelper(23004) ; If your wall helper exists
+trigger1 = abs(helper(23004),pos x-pos x)=[-30,-5]  ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
+x = helper(23004),pos x - 20
+
+[State 0, PosSet]
+type = PosSet
+triggerall = numhelper(23004) ; If your wall helper exists
+trigger1 = abs(helper(23004),pos x-pos x)=[30,0]  ; If the absolute distance between your wall helper and P1 is less than 20 pixels.
+x = helper(23004),pos x + 20
 ;ignorehitpause = 
 ;persistent = 
 
@@ -1706,7 +1742,7 @@ type = HitDef
 getpower = 0
 triggerall = !movecontact
 trigger1 = 1
-attr = S, SP
+attr = A, SP
 animtype  = Heavy
 damage    = 5
 Hitflag = MAF
@@ -1723,7 +1759,7 @@ ground.slidetime = 12
 ground.hittime  = 100 + ifelse(enemy,movetype = A, 7,0)
 ground.velocity = 0,0
 guard.velocity = -2
-airguard.velocity = -3,-2
+airguard.velocity = -3,-3
 air.velocity = 0,3
 Fall = 1
 fall.recover = 0
@@ -1752,7 +1788,7 @@ movetype= A
 physics = N
 juggle  = 1
 ctrl = 0
-anim = 462
+anim = ifelse(P2movetype=H,462,463)
 velset = 0,0
 sprpriority = 5
 
@@ -1792,7 +1828,7 @@ value = movehit
 ;persistent = 
 
 [State 0, Juggle Map]
-type = RootMapSet
+type = MapSet
 trigger1 = 1
 map = "fatal"
 value = 1
@@ -2518,7 +2554,7 @@ animtype  = Light
 damage    = 10
 guardflag = HA
 pausetime = 10,14
-guard.pausetime = 8,6 
+guard.pausetime = 8,5
 sparkno = 0
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2888,13 +2924,6 @@ trigger1 = time = 10
 time = 10
 length = 3
 
-[State 0, FatalCounter]
-type = MapSet
-trigger1 = 1
-map = "fatal"
-value = 1
-ignorehitpause = 1
-
 [State 0, VelSet]
 type = VelSet
 trigger1 = time = 10
@@ -3002,7 +3031,7 @@ y = root,pos y
 
 
 [State 0, Juggle Map]
-type = RootMapSet
+type = MapSet
 trigger1 = 1
 map = "fatal"
 value = 1
@@ -3037,7 +3066,7 @@ triggerall = !movecontact
 triggerall = map(juggle) < 120 || hitcount != 0
 triggerall = enemy,map(hitOverride) = 0
 trigger1 = 1
-attr = S, SP
+attr = S, AP
 animtype  = Heavy
 damage    = ifelse(enemy,movetype = A, 100,50)
 Hitflag = MAF
@@ -3132,6 +3161,15 @@ value = 430
 
 
 [Statedef -2]
+
+[State 0, NotHitBy]
+type = HitBy
+trigger1 = var(18) = 1
+value = SCA,NT,ST,HT
+time = 2
+;persistent = 
+
+
 
 [State 0, Failed to block a low!]
 type = Explod

@@ -2,14 +2,16 @@
 <#f0f000>:EX ATTACKS!:</>
 
 Ice Trap (1/2 Bar)								^C
-	"Centurion encases the opponent in ice."
+	"Centurion encases the opponent in ice.
+	This can transition into Ice Shard."
 
-Ice Shard (1/2 Bar)				_D^C
+Ice Shard (1/4 Bar)				_D^C
 	"Centurion shoots multiple ice shards."
 
 Ice Launch (1/2 Bar)				_AIR^C
 	"Centurion propels himself forward by
-	breaking the ice that surrounds him."
+	breaking the ice that surrounds him.
+	This can transition into Ice Slinger."
 
 Ice Slinger (1/4 Bar)				_AIR_D^C
 	"Centurion slings an ice beam that explodes 
@@ -37,7 +39,12 @@ Karambit Toss: "Holy Gimmick Wtf" (1 Bar, _AIR OK)		_D_DB_B^B
 	spinning for 5 seconds."
 
 Grab: "The Move Of All Time" (1 1/2 Bars)				_D_DF_F^C
-	"Centurions attempts to grab the opponent.
+	"Centurion attempts to grab the opponent.
 	If successful he will encase the opponent in
 	ice, toss his karambit at them and end off
 	with a strong punch."
+
+Ice Shield (2 Bars)				_D_DB_B^C
+	"Centurion creates an ice shield around him.
+	The amount of hits this tanks depends on the
+	hitpause of the move, Multihits Lose!!!!!.

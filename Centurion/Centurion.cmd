@@ -643,6 +643,17 @@ triggerall = command = "SPECIAL 5"
 Triggerall = statetype != A
 Triggerall = power >= 1500
 trigger1 = ctrl
+;---------------------------------------------------------------------------
+; Special 6 
+[State -1, SPECIAL 6]
+type = ChangeState
+value = 26000
+triggerall = numhelper(26005) = 0
+triggerall = numhelper(3500) = 0
+triggerall = command = "SPECIAL 6"
+Triggerall = statetype != A
+Triggerall = power >= 2000
+trigger1 = ctrl
 ;===========================================================================
 ;---------------------------------------------------------------------------
 ; Run Fwd
