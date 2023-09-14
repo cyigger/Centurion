@@ -2553,7 +2553,7 @@ attr = A, NA
 animtype  = Light
 damage    = 10
 guardflag = HA
-pausetime = 10,14
+pausetime = 9,16
 guard.pausetime = 8,5
 sparkno = 0
 guard.sparkno = 13000
@@ -2744,7 +2744,7 @@ attr = A, NA
 animtype  = Medium
 damage    = 15
 guardflag = HA
-pausetime = 10,10
+pausetime = 10,12
 sparkno = 1
 guard.sparkno = 13000
 sparkxy = -8,-25
@@ -2770,7 +2770,7 @@ attr = A, NA
 animtype  = Medium
 damage    = ifelse(enemy,movetype = A, 40,20)
 guardflag = HA 
-pausetime = ifelse(enemy,movetype = A, 26,13),ifelse(enemy,movetype = A, 32,16)
+pausetime = ifelse(enemy,movetype = A, 36,18),ifelse(enemy,movetype = A, 32,16)
 sparkno = 2
 guard.sparkno = 13000
 sparkxy = -8,-25

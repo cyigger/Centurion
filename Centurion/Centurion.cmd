@@ -651,6 +651,7 @@ value = 26000
 triggerall = numhelper(26005) = 0
 triggerall = numhelper(3500) = 0
 triggerall = command = "SPECIAL 6"
+Triggerall = enemy,movetype != H
 Triggerall = statetype != A
 Triggerall = power >= 2000
 trigger1 = ctrl
