@@ -2253,6 +2253,7 @@ y = 0.2
 [State 200, 1]
 type = HitDef
 getpower = 0
+triggerall = map(juggle) < 100 || hitcount != 0
 triggerall = !movecontact
 trigger1 = 1
 attr = S, NA
@@ -2285,8 +2286,7 @@ value = 21000
 [State 1000, Special 4 - Crossup]
 type = ChangeState
 triggerall = numhelper(3500) = 0
-triggerall = power >= 500
-triggerall = var(19) = 0
+triggerall = power >= 1000
 trigger1 = command = "SPECIAL 4"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 22000
@@ -2302,7 +2302,7 @@ value = 66
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
-triggerall = var(20) = 0
+triggerall = power >= 200
 trigger1 = command = "holddown"
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
@@ -2311,7 +2311,7 @@ value = 460
 type = ChangeState
 triggerall = movecontact
 triggerall = numhelper(3500) = 0
-triggerall = var(20) = 0
+triggerall = power >= 500
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
@@ -2608,6 +2608,7 @@ value = 460
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = power >= 500
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
@@ -2817,6 +2818,7 @@ value = 460
 type = ChangeState
 Triggerall = movecontact
 triggerall = numhelper(3500) = 0
+triggerall = power >= 500
 trigger1 = command = "c"
 trigger2 = roundstate = 2 && ailevel > 0 && random < (ailevel * 100)
 value = 620
@@ -2955,6 +2957,7 @@ keyctrl = 0
 [State 0, ChangeState]
 type = ChangeState
 triggerall = numhelper(440) <= 1
+triggerall = power >= 200
 trigger1 = command = "hold_c" && command = "holddown"
 value = 460
 ctrl = 0
