@@ -2,7 +2,7 @@
 Centurion Character mod for Kirby Battle Blitz
 
 # Credits
-Centurion owned by xlCenturion
+Centurion owned by xlCenturion                  
 Portrait made by aidanisbakawaka
 
 # Other Mods
