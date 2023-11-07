@@ -1631,8 +1631,8 @@ inheritJuggle = 1
 
 [State 200, End]
 type = ChangeState
-trigger1 = helper(461),movecontact &&  command = "holddown" &&  command = "hold_c" && time = 27
-value = 461
+trigger1 = helper(461),movecontact &&  command = "holddown" &&  command = "hold_c" && time = 27 && prevstateno != 460
+value = 460
 ctrl = 1
 
 [State 200, End]
