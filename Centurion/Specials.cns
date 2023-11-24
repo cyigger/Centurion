@@ -950,7 +950,7 @@ triggerall = AnimElem = 4 && !movecontact
 trigger1 = 1
 attr = A, NP
 animtype  = Light
-damage    = 170
+damage    = 160
 hitflag = MAFD
 guardflag = LA
 pausetime = 0,25
@@ -1797,7 +1797,7 @@ endcmdbuftime = 7
 type = Helper
 trigger1 = time = 0 ;MATH
 helpertype = normal ;player
-name = "this is where i want it to be"
+name = "ice shield"
 ID = 26005
 stateno = 26005
 pos = 0,0

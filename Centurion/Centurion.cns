@@ -3181,10 +3181,27 @@ value = 430
 
 [State 0, NotHitBy]
 type = HitBy
-trigger1 = var(18) = 1
+trigger1 = var(18) = 1 && !helper(26005),movetype = H
 value = SCA,NT,ST,HT
 time = 2
 ;persistent = 
+
+[State 0, NotHitBy]
+type = HitBy
+trigger1 = helper(26005),movetype = H
+value = SCA,AA,AP,AT
+time = 2
+;persistent = 
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = stateno != [120,155] && helper(26005),movetype = H
+value = 120
+ctrl = 0
+;anim =
+;ignorehitpause = 
+;persistent = 
+
 
 
 
