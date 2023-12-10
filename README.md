@@ -4,6 +4,7 @@ Centurion Character mod for Kirby Battle Blitz
 # Credits
 Centurion owned by xlCenturion                  
 Portrait made by aidanisbakawaka
+Thanks to SwordGrayFire for announcer voice on char select
 
 # Other Mods
 Korby: https://drive.google.com/drive/u/1/folders/1dLZaoAaNUjZqGflDYvbpemgB0DpKS6uT    
